@@ -1,17 +1,7 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-
+import db from "@/db";
+import { playing_with_neon, users } from "@/db/schema";
 export default async function Home() {
-  return (
-    <div>
-      home
-      <header>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-    </div>
-  );
+  const result = await db.select().from(playing_with_neon);
+
+  return <div>landing page</div>;
 }
