@@ -34,7 +34,6 @@ export async function POST(req: Request) {
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
-  console.log(svix_id, svix_timestamp, svix_signature, body);
 
   // Verify the payload with the headers
   try {
@@ -49,7 +48,7 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
-  console.log("test3");
+
   // Do something with the payload
   // For this guide, you simply log the payload to the console
   const eventType = evt.type;
