@@ -8,6 +8,7 @@ import {
   UserProfile,
 } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import ModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   return (
@@ -18,6 +19,7 @@ const Navbar = () => {
             run<span className="bg-orange-500">hub</span>
           </Link>
           <div className="flex items-center gap-8">
+            <ModeToggle />
             <SignedOut>
               <Button>
                 <SignInButton />

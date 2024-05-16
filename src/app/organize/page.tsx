@@ -21,7 +21,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import db from "@/db";
 import data from "@/db/data.json";
-import { playing_with_neon, runs, users } from "@/db/schema";
+import { runs } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@clerk/nextjs";
 import { format } from "date-fns";
