@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import db from "@/db";
 import data from "@/db/data.json";
 import { runs } from "@/db/schema";
@@ -26,7 +27,9 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@clerk/nextjs";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { z } from "zod";
 
 enum Pace {
   Fast = "fast",
@@ -47,18 +50,60 @@ const Page = () => {
   const [pace, setPace] = useState<Pace>();
   const [distance, setDistance] = useState("");
   const [description, setDescription] = useState("");
+
   const { userId } = useAuth();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const handleCreateRun = async () => {
-    const res = await db.insert(runs).values({
-      description,
-      distance,
-      date_time: date,
-      pace,
-      start_location: `${selectedStartingCity}, ${selectedStartingDistrict}, ${startingPointDetail}`,
-      end_location: `${selectedEndingCity}, ${selectedEndingDistrict}, ${endingPointDetail}`,
-      user_id: userId,
+    const schema = z.object({
+      selectedStartingCity: z.string().min(1),
+      selectedStartingDistrict: z.string().min(1),
+      startingPointDetail: z.string().min(1),
+      selectedEndingCity: z.string().min(1),
+      selectedEndingDistrict: z.string().min(1),
+      endingPointDetail: z.string().min(1),
+      date: z.date().min(new Date()),
+      pace: z.nativeEnum(Pace),
+      distance: z.string().min(1),
+      description: z.string().min(1),
     });
+
+    try {
+      schema.parse({
+        selectedStartingCity,
+        selectedStartingDistrict,
+        startingPointDetail,
+        selectedEndingCity,
+        selectedEndingDistrict,
+        endingPointDetail,
+        date,
+        pace,
+        distance,
+        description,
+      });
+      const res = await db.insert(runs).values({
+        description,
+        distance,
+        date_time: date,
+        pace,
+        start_location: `${selectedStartingCity}, ${selectedStartingDistrict}, ${startingPointDetail}`,
+        end_location: `${selectedEndingCity}, ${selectedEndingDistrict}, ${endingPointDetail}`,
+        user_id: userId,
+      });
+      toast({
+        title: "Success",
+        description: "Run created successfully",
+      });
+      router.push("/");
+    } catch (e) {
+      console.error(e.errors);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please fill all fields correctly",
+      });
+    }
   };
 
   return (
