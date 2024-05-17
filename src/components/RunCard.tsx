@@ -1,3 +1,6 @@
+import { MoveRight } from "lucide-react";
+import Link from "next/link";
+
 type Run = {
   id: number;
   user_id: string | null;
@@ -10,14 +13,36 @@ type Run = {
 };
 
 const RunCard = ({ run }: { run: Run }) => {
+  const [startProvince, startDistrict, startDetail] =
+    run.start_location?.split(", ");
+  const [endProvince, endDistrict, endDetail] = run.end_location?.split(", ");
   return (
-    <div className="rounded-xl p-4">
-      <h2 className="text-xl font-semibold">{run.distance}</h2>
-      <p className="text-sm text-foreground/50">{run.description}</p>
-      <p className="text-sm text-foreground/50">{}</p>
-      <p className="text-sm text-foreground/50">{run.start_location}</p>
-      <p className="text-sm text-foreground/50">{run.end_location}</p>
-    </div>
+    <Link
+      href={`run-detail/${run.id}`}
+      className="rounded-xl p-4 border flex justify-between w-[400px] shadow-lg"
+    >
+      <div className="flex flex-col gap-7">
+        <div className="flex flex-col gap-3">
+          <p>
+            {startProvince}, {startDistrict}
+          </p>
+          <p>{startDetail}</p>
+        </div>
+        <p>{run.pace}</p>
+      </div>
+      <div className="self-center">
+        <MoveRight />
+      </div>
+      <div className="flex flex-col gap-7">
+        <div className="flex flex-col gap-3">
+          <p>
+            {endProvince}, {endDistrict}
+          </p>
+          <p>{endDetail}</p>
+        </div>
+        <p>{run.distance}</p>
+      </div>
+    </Link>
   );
 };
 

@@ -9,9 +9,11 @@ const Page = async () => {
   return (
     <div>
       <MaxWidthWrapper>
-        {data.map((run) => (
-          <RunCard key={run.id} run={run} />
-        ))}
+        <div className="mt-10 flex gap-10">
+          {data.map((run) => (
+            <RunCard key={run.id} run={run} />
+          ))}
+        </div>
       </MaxWidthWrapper>
     </div>
   );
