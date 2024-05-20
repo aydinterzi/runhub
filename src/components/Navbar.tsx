@@ -1,12 +1,6 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-  UserProfile,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import ModeToggle from "./DarkModeToggle";
 
@@ -16,10 +10,15 @@ const Navbar = () => {
       <MaxWidthWrapper>
         <div className="flex h-14 justify-between items-center">
           <Link href="/" className="font-semibold z-40 text-xl text-black">
-            run<span className="bg-orange-500">hub</span>
+            run<span className="bg-green-500">hub</span>
           </Link>
           <div className="flex items-center gap-8">
             <ModeToggle />
+            <Button>
+              <Link className="font-medium" href="/runs">
+                Runs
+              </Link>
+            </Button>
             <SignedOut>
               <Button>
                 <SignInButton />

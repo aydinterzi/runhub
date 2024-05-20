@@ -1,5 +1,6 @@
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 type Run = {
   id: number;
@@ -41,6 +42,7 @@ const RunCard = ({ run }: { run: Run }) => {
           <p>{endDetail}</p>
         </div>
         <p>{run.distance}</p>
+        <Button className="bg-blue-500">Go detail</Button>
       </div>
     </Link>
   );

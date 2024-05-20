@@ -30,7 +30,12 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
-
+import {
+  GoogleMap,
+  MarkerF,
+  InfoWindowF,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 enum Pace {
   Fast = "fast",
   Medium = "medium",
@@ -112,6 +117,7 @@ const Page = () => {
         <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-40 items-center mb-6">
           <div className="flex flex-col gap-4 w-full">
             <p>Starting point</p>
+
             <Select
               onValueChange={(e) => setSelectedStartingCity(e)}
               value={selectedStartingCity}

@@ -4,7 +4,6 @@ import db from "@/db";
 import { runs } from "@/db/schema";
 const Page = async () => {
   const data = await db.select().from(runs);
-  console.log(data);
 
   return (
     <div className="mt-10">
