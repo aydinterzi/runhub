@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +28,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            {children}
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <div className="flex-grow">{children}</div>
+              <Footer />
+            </div>
             <Toaster />
           </ThemeProvider>
         </body>

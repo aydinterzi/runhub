@@ -30,12 +30,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
-import {
-  GoogleMap,
-  MarkerF,
-  InfoWindowF,
-  useJsApiLoader,
-} from "@react-google-maps/api";
+
 enum Pace {
   Fast = "fast",
   Medium = "medium",

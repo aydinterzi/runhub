@@ -24,6 +24,7 @@ const RunCard = ({ run }: { run: Run }) => {
     >
       <div className="flex flex-col gap-7">
         <div className="flex flex-col gap-3">
+          <p className="font-semibold">Starting point</p>
           <p>
             {startProvince}, {startDistrict}
           </p>
@@ -31,11 +32,11 @@ const RunCard = ({ run }: { run: Run }) => {
         </div>
         <p>{run.pace}</p>
       </div>
-      <div className="self-center">
-        <MoveRight />
-      </div>
+
       <div className="flex flex-col gap-7">
         <div className="flex flex-col gap-3">
+          <p className="font-semibold">Ending point</p>
+
           <p>
             {endProvince}, {endDistrict}
           </p>
