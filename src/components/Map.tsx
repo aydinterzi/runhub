@@ -3,7 +3,7 @@ we need to make this component client rendered as well*/
 "use client";
 
 //Map component Component from library
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, MarkerF } from "@react-google-maps/api";
 
 //Map's styling
 const defaultMapContainerStyle = {
@@ -29,7 +29,11 @@ const defaultMapOptions = {
   mapTypeId: "satellite",
 };
 
-const MapComponent = ({ mapCenter = defaultMapCenter }) => {
+const MapComponent = ({
+  mapCenter = defaultMapCenter,
+  startPoint,
+  destPoint,
+}) => {
   return (
     <div className="w-full">
       <GoogleMap
@@ -37,7 +41,10 @@ const MapComponent = ({ mapCenter = defaultMapCenter }) => {
         center={mapCenter}
         zoom={defaultMapZoom}
         options={defaultMapOptions}
-      ></GoogleMap>
+      >
+        <MarkerF position={startPoint} />
+        <MarkerF position={destPoint} />
+      </GoogleMap>
     </div>
   );
 };

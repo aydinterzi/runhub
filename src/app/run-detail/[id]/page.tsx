@@ -17,9 +17,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
     run.start_location?.split(", ");
   const [endProvince, endDistrict, endDetail] = run.end_location?.split(", ");
 
-  const findCity = latlong.find(
+  const startPoint = latlong.find(
     (city) =>
       city.name.toLocaleLowerCase() === startProvince.toLocaleLowerCase()
+  );
+
+  const destPoint = latlong.find(
+    (city) => city.name.toLocaleLowerCase() === endProvince.toLocaleLowerCase()
   );
 
   async function handleJoinRun() {
@@ -59,8 +63,16 @@ const Page = async ({ params }: { params: { id: string } }) => {
             </div>
             <MapComponent
               mapCenter={{
-                lat: findCity?.coordinates.lat,
-                lng: findCity?.coordinates.longitude,
+                lat: startPoint?.coordinates.lat,
+                lng: startPoint?.coordinates.longitude,
+              }}
+              startPoint={{
+                lat: startPoint?.coordinates.lat,
+                lng: startPoint?.coordinates.longitude,
+              }}
+              destPoint={{
+                lat: destPoint?.coordinates.lat,
+                lng: destPoint?.coordinates.longitude,
               }}
             />
           </div>
